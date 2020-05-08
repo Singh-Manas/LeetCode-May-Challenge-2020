@@ -1,0 +1,42 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int depthx=-1;
+    int depthy=-1;
+    TreeNode *parx=NULL;
+    TreeNode *pary=NULL;
+    bool isCousins(TreeNode* root, int x, int y) {
+        getdepth(root,x,y,0,NULL);
+        return depthx==depthy && parx!=pary;
+    }
+    void getdepth(TreeNode *root,int x,int y,int depth,TreeNode *parent)
+    {
+        if(root==NULL)
+            return;
+        if(root->val==x)
+        {
+            depthx=depth;
+            parx=parent;
+        }
+        else if(root->val==y)
+        {
+            depthy=depth;
+            pary=parent;
+        }
+        else
+        {
+            getdepth(root->left,x,y,depth+1,root);
+            getdepth(root->right,x,y,depth+1,root);
+        }
+    }
+};
