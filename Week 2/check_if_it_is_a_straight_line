@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& c) {
+        if(c.size()==2) // if there are 2 points then there exist a straight line
+            return true;
+        int n=c.size();
+        int x1=c[0][0]; //finding first point x coordinate
+        int x2=c[1][0]; //finding second point x coordinate
+        int y1=c[0][1]; //finding first point y coordinate
+        int y2=c[1][1]; //finding second point y coordinate
+        int x=x2-x1;    //finding difference of x coordinates used to find equation of straight line 
+        int y=y2-y1;    //finding difference of y coordinates used to find equation of straight line 
+        for(int i=2;i<n;i++)
+        {
+            if(((c[i][0]-x1)*y)!=((c[i][1]-y1)*x)) // for every point check if it lies on straight line
+                return false;
+        }
+        return true;
+    }
+};
