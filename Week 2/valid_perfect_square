@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        int i=1,j=num-1;
+        if(num==1)          //base condition to check if number is 1
+            return true;
+        while(i<=j)         //applying binary search to find sqrt
+        {
+            long mid=(i+j)/2;   //declared mid as long so that it does not overflow when getting its square
+            if(mid*mid==num)    //checking if mid^2 is equal to num i.e mid is sqrt of num
+                return true;
+            if(mid*mid>num)     //if mid^2 > num then sqrt lies in left half
+                j=mid-1;
+            else                //else sqrt lies in right half
+                i=mid+1;
+        }
+        return false;
+    }
+};
