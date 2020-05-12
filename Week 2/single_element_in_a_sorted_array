@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n=nums.size();
+        int low=0,high=n-1;
+        while(low<high) //applying binary search
+        {
+            int mid=low+(high-low)/2; 
+            if(mid%2==0)    //all elements before required element have first occurence on even indices and next on odd occurences
+            {
+                if(nums[mid]==nums[mid+1])    //if mid and mid+1 elements are same then ans lies in right part
+                    low=mid+2;
+                else if(nums[mid]==nums[mid-1]) //if mid and mid-1 elements are same then ans lies in left part
+                    high=mid-2;
+                else
+                    return nums[mid];   //else we are on the mid element
+            }
+            else  //all elements after required element have first occurence on odd indices and next on even indices
+            {
+                if(nums[mid]==nums[mid-1])
+                    low=mid+1;
+                else if(nums[mid]==nums[mid+1])
+                    high=mid-1;
+               else return nums[mid];
+            }
+        }
+        return nums[low];
+    }
+};
